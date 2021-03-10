@@ -13,7 +13,8 @@ const songsIndians = require("./scrappers/songsIndian");
 const trends = require("./scrappers/twittertrends");
 const famousbday = require("./scrappers/Famousbday");
 const github = require("./scrappers/github");
-// const connectmongo=require('../API/server');
+const topgainers = require("./scrappers/topgainers");
+const toploosers = require("./scrappers/toploosers");
 
 //importing schema files
 const Games = require("./schema/Games");
@@ -23,6 +24,8 @@ const TwitterTrends = require("./schema/TwitterTrends");
 const Events = require("./schema/Events");
 const FamousPerson = require("./schema/FamousPerson");
 const Github = require("./schema/Github");
+const TopGainers = require("./schema/TopGainers");
+const TopLoosers = require("./schema/TopLoosers");
 
 //connecting to database(mongodb)
 async function connectmongo() {
@@ -55,8 +58,12 @@ async function main() {
 
   await deletecollection.deleteall(Github);
   await github.scraprepos();
+
+  await deletecollection.deleteall(TopGainers);
+  await topgainers.scrapgainers();
+
+  await deletecollection.deleteall(TopLoosers);
+  await toploosers.scraploosers();
 }
-
-
 
 main();

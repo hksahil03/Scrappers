@@ -2,7 +2,7 @@ const mongoose=require('mongoose');
 
 const Events=mongoose.model(
 'Events',mongoose.Schema({
- eventName:String,
+ eventName:{ type : String, required : true }
 })
 )
 module.exports=Events;

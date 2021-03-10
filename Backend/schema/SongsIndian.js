@@ -2,8 +2,8 @@ const mongoose=require('mongoose');
 
 const SongsIndian=mongoose.model(
 'SongsIndian',mongoose.Schema({
- songIndianName:String,
- songIndianArtist:String,
+ songIndianName:{ type : String, required : true },
+ songIndianArtist:{ type : String, required : true },
 })
 )
 module.exports=SongsIndian;

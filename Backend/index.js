@@ -4,6 +4,7 @@ const cheerio = require("cheerio");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
+
 //REST API demo in Node.js
 var express = require("express"); // require the express framework
 var app = express();
@@ -35,6 +36,8 @@ const TwitterTrends = require("./schema/TwitterTrends");
 const Events = require("./schema/Events");
 const FamousPerson = require("./schema/FamousPerson");
 const Github = require("./schema/Github");
+const TopGainers = require("./schema/TopGainers");
+const TopLoosers = require("./schema/TopLoosers");
 
 //connecting to database(mongodb)
 async function connectmongo() {
@@ -159,6 +162,38 @@ app.get("/famousperson", function (req, res, next) {
       console.log(err, "err");
     });
 });
+
+
+
+//Get topgainers
+app.get("/topgainers", function (req, res, next) {
+  TopGainers.find()
+    .skip(0)
+    .limit(3)
+    .then(function (datacame) {
+      return res.json(datacame);
+    })
+    .catch((err) => {
+      console.log(err, "err");
+    });
+});
+
+
+
+//Get toploosers
+app.get("/toploosers", function (req, res, next) {
+  TopLoosers.find()
+    .skip(2)
+    .limit(3)
+    .then(function (datacame) {
+      return res.json(datacame);
+    })
+    .catch((err) => {
+      console.log(err, "err");
+    });
+});
+
+
 
 // Create a server to listen at port 8080
 var server = app.listen(port, function () {
