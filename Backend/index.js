@@ -1,9 +1,12 @@
 //importing libraries
 const request = require("request-promise");
 const cheerio = require("cheerio");
+require('dotenv').config();
+console.log(process.env,"my enviroment varaibles hain ye");
+const scrapperfile = require("./scrapper");
+
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-
 
 //REST API demo in Node.js
 var express = require("express"); // require the express framework
@@ -22,7 +25,7 @@ app.use(function (req, res, next) {
 app.set("port", process.env.PORT || 8000);
 var port = app.get("port");
 
-//middlewares
+// Middlewares
 // Parse incoming requests data
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -40,18 +43,18 @@ const TopGainers = require("./schema/TopGainers");
 const TopLoosers = require("./schema/TopLoosers");
 
 //connecting to database(mongodb)
-async function connectmongo() {
+(async function connectmongo() {
   await mongoose.connect(
-    "mongodb+srv://sahil:sahil@cluster0.iiimv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.iiimv.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
   );
   console.log("connected to db...");
-}
+})();
 
-async function main() {
-  await connectmongo();
+// This function runs the mainscrapper() that is in scrapper.js file (that function is actually doing the scrapping function)
+async function scrap(){
+ await scrapperfile.mainscrapper();
 }
-
-main();
+scrap();
 
 app.get("/", function (req, res, next) {
   //localhost:8000/
@@ -122,20 +125,14 @@ app.get("/github", function (req, res, next) {
     });
 });
 
-
 //Get specific language repos
 app.get("/github/:repolanguage", function (req, res, next) {
   Github.find({
-    repolanguage:req.params.repolanguage
+    repolanguage: req.params.repolanguage,
   }).then(function (datacame) {
     return res.json(datacame);
   });
 });
-
-
-
-
-
 
 //Get twitter results
 app.get("/twittertrends", function (req, res, next) {
@@ -163,8 +160,6 @@ app.get("/famousperson", function (req, res, next) {
     });
 });
 
-
-
 //Get topgainers
 app.get("/topgainers", function (req, res, next) {
   TopGainers.find()
@@ -178,8 +173,6 @@ app.get("/topgainers", function (req, res, next) {
     });
 });
 
-
-
 //Get toploosers
 app.get("/toploosers", function (req, res, next) {
   TopLoosers.find()
@@ -192,8 +185,6 @@ app.get("/toploosers", function (req, res, next) {
       console.log(err, "err");
     });
 });
-
-
 
 // Create a server to listen at port 8080
 var server = app.listen(port, function () {

@@ -110,11 +110,11 @@ export default function Header() {
       </div>
 
       <Drawer
-        anchor={window.outerWidth < 460 ? "bottom" : "right"}
+        anchor={'bottom'}
         open={drawer}
+        onClose={() => setdrawer(false)}
         zIndex="drawer"
         classes={{ paper: styles.paper }}
-        // onClose={setdrawer(false)}
       >
         <Info setdrawer={setdrawer}></Info>
       </Drawer>

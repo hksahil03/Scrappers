@@ -22,7 +22,6 @@ export default function Card(props) {
     category,
     categorywrapper,
   } = props;
-  var FontAwesome = require("react-fontawesome");
   // console.log(songs, "songs from component..");
   // console.log(songsIndian, "songsIndian from component..");
   // console.log(events, "events from component..");

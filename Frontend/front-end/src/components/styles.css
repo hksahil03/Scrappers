@@ -25,6 +25,20 @@ body {
   top: 15px;
 }
 
+@media only screen and (min-width: 1024px) {
+  /* If the screen size is over 1024px wide. */
+  .navicon {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  /* If the screen size is atleast 768px wide, but no more than 1023px */
+  .navicon {
+    display: none;
+  }
+}
+
 .list {
   display: flex;
   flex-direction: column;

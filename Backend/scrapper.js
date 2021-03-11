@@ -1,8 +1,11 @@
 //importing libraries
 const request = require("request-promise");
 const cheerio = require("cheerio");
-const mongoose = require("mongoose");
 
+
+// require('dotenv').config();
+
+const mongoose = require("mongoose");
 const deletecollection = require("./deletecollections");
 
 // This returns module object with the functions from module's file.
@@ -30,12 +33,12 @@ const TopLoosers = require("./schema/TopLoosers");
 //connecting to database(mongodb)
 async function connectmongo() {
   await mongoose.connect(
-    "mongodb+srv://sahil:sahil@cluster0.iiimv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.iiimv.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
   );
   console.log("connected to db...");
 }
 
-async function main() {
+async function mainscrapper() {
   await connectmongo();
 
   await deletecollection.deleteall(Games);
@@ -66,4 +69,6 @@ async function main() {
   await toploosers.scraploosers();
 }
 
-main();
+// mainscrapper();
+
+module.exports.mainscrapper= mainscrapper;
