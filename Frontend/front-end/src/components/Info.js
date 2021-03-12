@@ -1,6 +1,7 @@
 import React from "react";
 import { FcOk } from "react-icons/fc";
 import { TiTimes } from "react-icons/ti";
+import TextCarousal from "./TextCarousal";
 
 export default function Info(props) {
   const { setdrawer } = props;
@@ -20,14 +21,17 @@ export default function Info(props) {
       />
       <div className="list">
         <p>What does this site do?</p>
-        <p>This website shows the Top 3 of today's Internet.</p>
+        <p>TLDR is designed to simplify your life.<br></br>It summarizes the Internet in shortest way possible.
+</p>
+        <TextCarousal></TextCarousal>
       </div>
 
       <div className="list">
-        <p>How do I get the data?</p>
+        <p>Is the data reliable?</p>
         <p>
-          I run a cron job every 12 hours which scraps the data from respective
-          websites and store it in database.
+          We are running a cron job every 6 hours which scraps the data from top websites like twitter, Inshorts, Spotify etc.
+          <br/><br/>
+          So yea , you can believe us !
         </p>
       </div>
       <hr style={{ margin: "0px 20px" }}></hr>
@@ -51,7 +55,7 @@ export default function Info(props) {
 
         {/* CTA */}
 
-        <a href="mailto:officialhksahil@gmail.com" class="btn success">
+        <a href="mailto:officialhksahil@gmail.com" class="btn success ">
           Get premium ! Drop a message
         </a>
       </div>

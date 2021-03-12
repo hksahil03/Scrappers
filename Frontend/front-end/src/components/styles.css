@@ -23,6 +23,41 @@ body {
   position: absolute;
   right: 30px;
   top: 15px;
+  font-size: 20px;
+}
+
+.carousal-container {
+  padding: 30px;
+  background: black;
+  border-radius: 8px;
+  margin-top: 16px;
+}
+
+.carousal-text {
+  margin: 0px 8px 0px 8px;
+}
+
+.slick-dots li button:before {
+  color: lightgoldenrodyellow !important;
+}
+.slick-track {
+  display: flex !important;
+  width: 2475px;
+  opacity: 1;
+  transform: translate3d(-275px, 0px, 0px);
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+.slick-dots li.slick-active button:before {
+  color: white;
+}
+.slick-prev:before {
+  margin-left: 2px !important;
+}
+
+.slick-next:before {
+  margin-right: 2px !important;
 }
 
 @media only screen and (min-width: 1024px) {
